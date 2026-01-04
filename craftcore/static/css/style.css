@@ -928,6 +928,10 @@ p, small, span, label {
   font-family: "Poppins", sans-serif;
 }
 
+.checkout textarea {
+  font-family: "Poppins", sans-serif;
+}
+
 
 @keyframes slideInFromRight {
   from {
