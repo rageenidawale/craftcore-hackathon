@@ -1,0 +1,181 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}{{ product.name }} | CraftCore{% endblock %}
+
+{% block content %}
+
+<div class="container">
+
+  <!-- ================= PRODUCT MAIN SECTION ================= -->
+ <div class="row product-detail-row g-5">
+
+  <!-- Left: Image -->
+  <div class="col-md-6">
+    <div class="product-image-wrapper"> 
+    <img
+      src="{{ product.image.url }}"
+      class="product-detail-image w-100 h-100"
+      alt="{{ product.name }}"
+    >
+    </div>
+  </div>
+
+  <!-- Right: Details -->
+  <div class="col-md-6 product-detail-content">
+
+    <h3 class="product-title">
+      {{ product.name }}
+    </h3>
+
+    <p class="product-artisan">
+      By {{ artisan.display_name }}
+    </p>
+
+    <!-- Badges -->
+    <div class="d-flex gap-2 mb-4">
+      <span class="badge badge-soft-dark">
+        {{ product.category.name }}
+      </span>
+
+      <span class="badge badge-soft-dark">
+        {{ product.material.name }}
+      </span>
+    </div>
+
+    <div class="product-price">
+      ₹ {{ product.price }}
+    </div>
+
+    <p class="product-description">
+      {{ product.description }}
+    </p>
+
+    {% if inactive %}
+      <div class="alert alert-warning product-alert">
+        This product is no longer available.
+      </div>
+    {% elif out_of_stock %}
+      <div class="alert alert-warning product-alert">
+        This product is currently out of stock.
+      </div>
+    {% endif %}
+
+    <div class="d-flex gap-3 mt-4">
+    
+
+      <a
+        class="btn site-btn"
+        {% if inactive or out_of_stock %}disabled{% endif %}
+        href="/checkout/?product={{ product.id }}"
+      >
+        Buy Now
+      </a>
+
+
+      <a href="#artisan" class="btn site-btn-outline">
+        Meet the Artisan
+      </a>
+
+    </div>
+
+  </div>
+</div>
+
+
+  <!-- ================= SIMILAR PRODUCTS ================= -->
+  {% if similar_products %}
+  <div class="mt-5">
+
+    <div class="d-flex justify-content-between align-items-center mb-3">
+      <h4 class="similar-product-heading">Similar Products</h4>
+
+      <!-- View more -->
+      <a href="/products/?category={{ product.category.id }}&material={{ product.material.id }}"
+        class="small text-decoration-none">
+        View more
+      </a>
+    </div>
+
+    <!-- Product tiles -->
+    <div class="row g-4">
+      {% for product in similar_products %}
+      <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+        {% include "marketplace/components/product_card.html" with product=product %}
+      </div>
+      {% endfor %}
+    </div>
+
+
+  </div>
+  {% endif %}
+
+
+  <!-- ================= MEET THE ARTISAN ================= -->
+<div id="artisan" class="meet-artisan-wrapper">
+
+  <h4 class="meet-artisan-heading">Meet the Artisan</h4>
+
+  <div class="meet-artisan-card">
+    <div class="row align-items-center g-5">
+
+      <!-- Artisan Image -->
+      <div class="col-md-3 text-center">
+        <img
+          src="{% if artisan.profile_image %}{{ artisan.profile_image_url }}{% else %}{% static 'images/user-default.png' %}{% endif %}"
+          alt="{{ artisan.display_name }}"
+          class="meet-artisan-img"
+        >
+      </div>
+
+      <!-- Artisan Info -->
+      <div class="col-md-9">
+        <h5 class="meet-artisan-name">{{ artisan.display_name }}</h5>
+
+        <p class="meet-artisan-location">
+          {{ artisan.location }}
+        </p>
+
+        <p class="meet-artisan-story">
+          {{ artisan.story }}
+        </p>
+
+        <a href="/artisans/{{ artisan.id }}/" class="btn site-btn">
+          View Artisan Profile
+        </a>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+
+  <!-- ================= MORE BY ARTISAN ================= -->
+  {% if artisan_products %}
+  <div class="mt-5 more-by-section">
+
+    <div class="d-flex justify-content-between align-items-center mb-3">
+      <h5 class="more-by-heading">More by the Artisan</h5>
+
+      <!-- View more -->
+      <a href="/artisans/{{ artisan.id }}/" class="small text-decoration-none">
+        View more
+      </a>
+    </div>
+
+    <div class="row g-4">
+      {% for product in artisan_products %}
+      <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+        {% include "marketplace/components/product_card.html" with product=product %}
+      </div>
+      {% endfor %}
+    </div>
+
+
+  </div>
+  {% endif %}
+
+
+</div>
+
+{% endblock %}

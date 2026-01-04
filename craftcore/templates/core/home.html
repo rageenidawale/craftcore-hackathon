@@ -1,0 +1,179 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}CraftCore | Handmade by Local Artisans{% endblock %}
+
+{% block content %}
+
+<!-- ================= HERO SECTION ================= -->
+<section class="hero-section">
+  <div class="hero-overlay">
+    <div class="container">
+      <div class="hero-content text-center">
+
+        <span class="hero-eyebrow">
+          HANDMADE · AUTHENTIC · LOCAL
+        </span>
+
+        <h1 class="hero-title">
+          Handmade with patience<br>
+          and love for the craft
+        </h1>
+
+        <p class="hero-subtext">
+          Support skilled local artisans and bring home products<br>
+          that carry tradition, care, and authenticity.
+        </p>
+
+        <div class="hero-actions">
+          <a href="/products/" class="btn btn-light hero-btn-primary">
+            Shop Handmade
+          </a>
+
+          <a href="/become-artisan/" class="btn btn-outline-light hero-btn-secondary">
+            Sell Your Craft
+          </a>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FEATURE SPLIT SECTION ================= -->
+<section class="feature-split-section">
+  <div class="container">
+    <div class="row align-items-center g-5">
+
+      <!-- Image -->
+      <div class="col-md-6">
+        <img src="{% static 'images/hero-img.png' %}" alt="Handcrafted products" class="img-fluid feature-image">
+      </div>
+
+      <!-- Content -->
+      <div class="col-md-6">
+        <span class="feature-eyebrow">
+          HANDMADE · AUTHENTIC · LOCAL
+        </span>
+
+        <h2 class="feature-title">
+          Handmade with patience<br>
+          and love for the craft
+        </h2>
+
+        <p class="feature-text">
+          Support skilled local artisans and bring home products
+          that carry tradition, care, and authenticity.
+        </p>
+
+        <a href="/products/" class="btn feature-btn">
+          Explore Handmade
+        </a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ================= PRODUCTS SECTION ================= -->
+<section class="featured-products-section">
+
+  <div class="container">
+
+  <h3 class="section-title text-center mb-5">
+    Featured Products
+  </h3>
+
+  <div class="row g-4 justify-content-center">
+    {% for product in products %}
+    <div class="col-8 col-sm-6 col-md-4">
+      {% include "marketplace/components/product_card.html" with product=product %}
+    </div>
+    {% endfor %}
+  </div>
+
+  <div class="text-center mt-5">
+    <a href="/products/" class="btn featured-view-all-btn">
+      View All
+    </a>
+  </div>
+
+  </div>
+
+</section>
+
+<!-- ================= TRUST FEATURES SECTION ================= -->
+<section class="trust-section">
+  <div class="container">
+    <div class="row text-center g-4">
+
+      <div class="col-6 col-md-3">
+        <div class="trust-item">
+          <img src="{% static 'images/icons/shipping.svg' %}" alt="Free Shipping">
+          <h6>Free Shipping</h6>
+          <p>Free shipping for orders over ₹150</p>
+        </div>
+      </div>
+
+      <div class="col-6 col-md-3">
+        <div class="trust-item">
+          <img src="{% static 'images/icons/guarantee.svg' %}" alt="Money Guarantee">
+          <h6>Money Guarantee</h6>
+          <p>Within 30 days for an exchange</p>
+        </div>
+      </div>
+
+      <div class="col-6 col-md-3">
+        <div class="trust-item">
+          <img src="{% static 'images/icons/support.svg' %}" alt="Online Support">
+          <h6>24/7 Online Support</h6>
+          <p>24 hours a day, 7 days a week</p>
+        </div>
+      </div>
+
+      <div class="col-6 col-md-3">
+        <div class="trust-item">
+          <img src="{% static 'images/icons/payment.svg' %}" alt="Flexible Payment">
+          <h6>Flexible Payment</h6>
+          <p>Pay with multiple credit cards</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ================= MEET OUR ARTISANS ================= -->
+<section class="artisan-split-section">
+  <div class="container">
+
+  <h3 class="section-title text-center mb-5">Meet Our Artisans</h3>
+
+  <div class="row g-4 justify-content-center">
+
+    {% for artisan in artisans %}
+    <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+      <div class="card artisan-card text-center h-100">
+
+        <img src="{{ artisan.profile_image_url }}" class="artisan-avatar mx-auto mt-3" alt="{{ artisan.display_name }}">
+
+        <div class="card-body">
+          <h6 class="mb-1">{{ artisan.display_name }}</h6>
+          <p class="text-muted small mb-3">{{ artisan.location }}</p>
+
+          <a href="/artisans/{{ artisan.id }}/" class="btn product-btn-dark">
+            View Artisan
+          </a>
+
+        </div>
+
+      </div>
+    </div>
+    {% endfor %}
+
+  </div>
+  </div>
+
+</section>
+
+{% endblock %}

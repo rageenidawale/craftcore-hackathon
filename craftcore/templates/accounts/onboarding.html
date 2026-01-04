@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% block title %}Welcome | CraftCore{% endblock %}
+
+{% block content %}
+
+<div class="container d-flex justify-content-center align-items-center"
+     style="min-height: 80vh; overflow: hidden;">
+
+  <div class="card shadow-sm p-4 slide-in"
+       style="max-width: 400px; width: 100%;">
+
+    <h4 class="mb-2 text-center">Almost there!</h4>
+    <p class="text-muted text-center mb-4">
+      Tell us a bit about you
+    </p>
+
+    <form method="post">
+      {% csrf_token %}
+
+      <div class="mb-3">
+        <label class="form-label">First Name</label>
+        <input
+          type="text"
+          name="first_name"
+          class="form-control"
+          required
+        >
+      </div>
+
+      <div class="mb-4">
+        <label class="form-label">Last Name</label>
+        <input
+          type="text"
+          name="last_name"
+          class="form-control"
+          required
+        >
+      </div>
+
+      <div class="d-grid">
+        <button class="btn btn-dark submit-button">
+          Continue
+        </button>
+      </div>
+
+    </form>
+
+  </div>
+
+</div>
+
+{% endblock %}

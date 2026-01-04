@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+
+{% block title %}{% if is_edit %}
+Update Artisan Profile
+{% else %}
+Become an Artisan
+{% endif %} | CraftCore{% endblock %}
+
+{% block content %}
+
+<div class="container mt-5" style="max-width: 600px; padding-bottom: 100px;">
+
+  <h3 class="mb-3 text-center">{% if is_edit %}
+    Update Artisan Profile
+    {% else %}
+    Become an Artisan
+    {% endif %}</h3>
+  <p class="text-muted text-center mb-4">
+    Share your craft with the world and start selling on CraftCore.
+  </p>
+
+  {% if messages %}
+  {% for message in messages %}
+  <div class="alert alert-danger">{{ message }}</div>
+  {% endfor %}
+  {% endif %}
+
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+
+    <!-- Display Name -->
+    <div class="mb-3">
+      <label class="form-label">Display Name</label>
+      <input type="text" name="display_name" class="form-control" value="{{ artisan.display_name|default_if_none:'' }}"
+        required>
+
+      <div class="form-text">
+        This name will be shown on your products and profile.
+      </div>
+    </div>
+
+    <!-- Location -->
+    <div class="mb-3">
+      <label class="form-label">Location</label>
+      <input type="text" name="location" class="form-control" value="{{ artisan.location|default_if_none:'' }}" required>
+    </div>
+
+    <!-- Artisan Story -->
+    <div class="mb-4">
+      <label class="form-label">Your Story</label>
+      <textarea name="story" class="form-control" rows="4"
+        placeholder="Tell buyers about your craft, techniques, or inspiration..."
+        required>{{ artisan.story|default_if_none:"" }}</textarea>
+      <div class="form-text">
+        Keep it short and authentic (3–5 lines is perfect).
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Profile Picture (optional)</label>
+
+      <input type="file" name="profile_pic" class="form-control" accept="image/*">
+
+      {% if is_edit and artisan.profile_pic %}
+      <div class="form-text mt-1">
+        Leave blank to keep existing picture.
+      </div>
+
+      <img src="{{ artisan.profile_pic.url }}" class="img-fluid rounded mt-2" style="max-height: 120px;">
+      {% endif %}
+    </div>
+
+
+    <!-- Submit -->
+    <div class="d-grid">
+      <button type="submit" class="btn btn-dark submit-button">
+        {% if is_edit %}
+        Update Profile
+        {% else %}
+        Become an Artisan
+        {% endif %}
+      </button>
+    </div>
+
+  </form>
+
+</div>
+
+{% endblock %}

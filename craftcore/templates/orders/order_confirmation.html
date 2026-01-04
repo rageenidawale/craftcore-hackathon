@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}Order Confirmed | CraftCore{% endblock %}
+
+{% block content %}
+
+<div class="container text-center py-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8 col-lg-6">
+      <h3 class="mb-3">🎉 Order Confirmed!</h3>
+      <p class="mb-4">
+        Your order <strong>#{{ order.id }}</strong> has been placed successfully.
+      </p>
+
+      <div class="d-flex justify-content-center gap-3">
+        <a href="/profile/#order-{{ order.id }}" class="btn btn-outline-dark submit-button-outline">
+          Track Order
+        </a>
+        <a href="/products/" class="btn btn-outline-dark submit-button-outline">
+          Continue Shopping
+        </a>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

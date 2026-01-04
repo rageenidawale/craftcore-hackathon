@@ -1,0 +1,942 @@
+/* ================= GLOBAL FONT ================= */
+html, body {
+  height: 100%;
+}
+
+body {
+  font-family: "Playfair Display", serif;
+  color: #2E2E2E;
+  background-color: #FAF7F2;
+  display: flex;
+  flex-direction: column;
+}
+
+h1, h2, h3, h4, h5 {
+  font-weight: 600;
+}
+
+p, small, span, label {
+  font-weight: 400;
+}
+
+.site-body {
+  min-height: 100vh;
+}
+
+.site-content {
+  flex: 1;
+}
+
+/* ================= NAVBAR ================= */
+
+.craft-navbar {
+  background-color: #F7F2EB; /* navbar base */
+  border-bottom: 1px solid #E6DFD3;
+  padding-top: 16px;
+  padding-bottom: 16px;
+}
+
+.craft-navbar .navbar-brand {
+  font-weight: 600;
+  color: #2E2E2E;
+}
+
+.craft-navbar .nav-link {
+  color: #2E2E2E;
+  font-weight: 500;
+}
+
+.craft-navbar .nav-link:hover {
+  color: #585B34;
+}
+
+/* Login / Signup button */
+.craft-navbar .btn-dark {
+  background-color: #585B34;
+  border-color: #585B34;
+  color: #F7F2EB;
+  border-radius: 0; /* NO rounded corners */
+  font-weight: 500;
+}
+
+.craft-navbar .btn-dark:hover {
+  background-color: #4C4F2C;
+  border-color: #4C4F2C;
+}
+
+/* Logout button */
+.craft-navbar .btn-outline-dark {
+  border-radius: 0;
+  border-color: #2E2E2E;
+  color: #2E2E2E;
+}
+
+.craft-navbar .btn-outline-dark:hover {
+  background-color: #2E2E2E;
+  color: #F7F2EB;
+}
+
+.craft-navbar .navbar-nav .nav-item {
+  margin-left: 1.75rem;
+}
+
+/* ================= FOOTER ================= */
+
+.craft-footer {
+  background-color: #585B34;
+  color: #F7F2EB;
+}
+
+.craft-footer small {
+  font-weight: 400;
+}
+
+/* ================= HERO SECTION ================= */
+
+.hero-section {
+  background-image: url("../images/hero-bg.png");
+  background-size: cover;
+  background-position: center;
+  height: calc(100vh - 72px); /* navbar height */
+  min-height: calc(100vh - 72px);
+  display: flex;
+  align-items: center;
+  position: relative;
+  margin-top: -16px;
+}
+
+@media (max-width: 768px) {
+  .hero-section {
+    min-height: 100vh;
+    height: auto;
+    padding: 4rem 1rem;
+  }
+}
+
+.hero-overlay {
+  width: 100%;
+  height: 100%;
+  /* background: rgba(88, 91, 52, 0.92);  */
+  display: flex;
+  align-items: center;
+}
+
+.hero-content {
+  max-width: 800px;
+  margin: auto;
+  color: #F7F2EB; /* soft off-white */
+  animation: fadeUp 0.8s ease-out;
+}
+
+.hero-eyebrow {
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  opacity: 0.8;
+  display: block;
+  margin-bottom: 1rem;
+}
+
+.hero-title {
+  font-size: 3rem;
+  line-height: 1.2;
+  margin-bottom: 1.5rem;
+  font-weight: 600;
+}
+
+.hero-subtext {
+  font-size: 1.05rem;
+  opacity: 0.9;
+  margin-bottom: 2rem;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+}
+
+/* Primary CTA */
+.hero-btn-primary {
+  background-color: #F7F2EB;
+  color: #585B34;
+  border-radius: 0;
+  padding: 0.75rem 1.75rem;
+  font-weight: 500;
+}
+
+.hero-btn-primary:hover {
+  background-color: #EFE8DD;
+  color: #585B34;
+}
+
+/* Secondary CTA */
+.hero-btn-secondary {
+  border-radius: 0;
+  padding: 0.75rem 1.75rem;
+  font-weight: 500;
+}
+
+.hero-btn-secondary:hover {
+  background-color: #EFE8DD;
+  color: #585B34;
+}
+/* ================= SUBTLE ANIMATION ================= */
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media (max-width: 768px) {
+  .hero-title {
+    font-size: 2.2rem;
+  }
+
+  .hero-actions {
+    flex-direction: column;
+  }
+}
+
+/* ================= FEATURE SPLIT SECTION ================= */
+
+.feature-split-section {
+  background-color: #F7F2EB; /* beige section */
+  padding: 5rem 0;
+}
+
+.feature-image {
+  border-radius: 0;
+  width: 100%;
+}
+
+/* Text styles */
+.feature-eyebrow {
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  color: #585B34;
+  display: block;
+  margin-bottom: 1rem;
+}
+
+.feature-title {
+  font-size: 2.2rem;
+  font-weight: 600;
+  color: #2E2E2E;
+  margin-bottom: 1.25rem;
+}
+
+.feature-text {
+  font-size: 1rem;
+  color: #2E2E2E;
+  opacity: 0.9;
+  margin-bottom: 2rem;
+  max-width: 420px;
+}
+
+/* Button */
+.feature-btn {
+  background-color: #2E2E2E;
+  color: #F7F2EB;
+  border-radius: 0;
+  padding: 0.75rem 1.75rem;
+  font-weight: 500;
+}
+
+.feature-btn:hover {
+  background-color: #1F1F1F;
+  color: #F7F2EB;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .feature-split-section {
+    padding: 3.5rem 1rem;
+  }
+
+  .feature-title {
+    font-size: 1.8rem;
+  }
+}
+
+/* ================= FEATURED PRODUCTS ================= */
+
+.featured-products-section {
+  background-color: #FAF7F2;
+  padding: 5rem 0;
+}
+
+.section-title {
+  font-weight: 600;
+  color: #2E2E2E;
+}
+
+/* Product Card */
+.product-card {
+  font-family: "Poppins", sans-serif;
+  background-color: #F7F2EB;
+  border: none;
+  padding: 1rem;
+  height: 100%;
+}
+
+.product-image-wrapper img {
+  width: 100%;
+  height: 260px;
+  object-fit: cover;
+}
+
+/* Card body */
+.product-card-body {
+  padding-top: 1rem;
+}
+
+/* Badges */
+.product-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.product-badge {
+  font-size: 0.65rem;
+  padding: 0.25rem 0.5rem;
+  border: 1px solid #2E2E2E;
+  color: #2E2E2E;
+  white-space: nowrap;
+  line-height: 1;
+}
+
+.product-badge.muted {
+  opacity: 0.6;
+}
+
+.product-badge.warning {
+  border-color: #B58B00;
+  color: #B58B00;
+}
+
+/* Text */
+.product-name {
+  font-weight: 500;
+  margin-bottom: 0.25rem;
+}
+
+.product-price {
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+/* Buttons */
+.product-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.product-btn-outline {
+  border: 1px solid #3A2E2B;
+  color: #3A2E2B;
+  background: transparent;
+  border-radius: 0;
+  width: 50%;
+  white-space: nowrap;
+}
+
+.product-btn-outline:hover {
+  background-color: #3A2E2B;
+  color: #F7F2EB;
+}
+
+.product-btn-dark {
+  background-color: #3A2E2B;
+  color: #F7F2EB;
+  border-radius: 0;
+  width: 50%;
+  white-space: nowrap;
+}
+
+.product-btn-dark:hover {
+  border: 1px solid #3A2E2B;
+  background-color: #F7F2EB;
+  color: #3A2E2B;
+}
+
+/* View all */
+.featured-view-all-btn {
+  background-color: #3A2E2B;
+  color: #F7F2EB;
+  padding: 0.75rem 2rem;
+  border-radius: 0;
+}
+
+.featured-view-all-btn:hover {
+  border: 1px solid #3A2E2B;
+  background-color: #F7F2EB;
+  color: #3A2E2B; 
+}
+
+/* Trust / Feature Strip */
+.trust-section {
+  background-color: #F3EDE2; /* soft beige */
+  padding: 3.5rem 0;
+}
+
+.trust-item img {
+  width: 56px;
+  height: 56px;
+  margin-bottom: 12px;
+  opacity: 0.85;
+  filter: contrast(1:1);
+}
+
+.trust-item h6 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1rem;
+  margin-bottom: 6px;
+  color: #2E2E2E;
+}
+
+.trust-item p {
+  font-size: 0.85rem;
+  color: #6B6B6B;
+  margin: 0;
+}
+
+.trust-item {
+  transition: transform 0.2s ease;
+}
+
+.trust-item:hover {
+  transform: translateY(-4px);
+}
+
+/* --------------------- MEET THE ARTISANS -------------------- */
+
+.artisan-split-section {
+  background-color: #F7F2EB; /* beige section */
+  padding: 5rem 0;
+}
+
+.artisan-card {
+  border: none;
+  background-color: #EDE5D6;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.artisan-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+}
+
+.artisan-card .card-body {
+  background-color: #EDE5D6;
+  padding-top: 1rem;
+}
+
+.artisan-avatar {
+  width: 128px;
+  height: 128px;;
+  object-fit: cover;
+  object-position: center top;
+  background-color: #EDE5D6;
+}
+
+/* ----------------------------- PRODUCTS PAGE -------------------------------- */
+
+.products-page {
+  margin-bottom: 100px;
+}
+
+.dropdown {
+  font-family: 'Poppins', sans-serif;
+}
+
+.dropdown button {
+  border-radius: 0;
+  background-color: #3A2E2B;
+  color: #fdfaf5;
+}
+
+.dropdown button:hover {
+  background-color: #fdfaf5;
+  color: #3A2E2B
+}
+
+/* Highlight tracked order on profile page */
+:target {
+  border: 2px solid #000;
+  background-color: #fdfaf5;
+}
+
+.artisan-header {
+  padding-top: 40px;
+  padding-bottom: 40px;
+}
+
+.artisan-profile-img {
+  width: 260px;
+  height: 260px;
+  object-fit: cover;
+}
+
+.artisan-description {
+  font-family: 'Poppins', sans-serif;
+  font-size: 15.5px;
+  line-height: 1.8;
+  color: #3a3a3a;
+  max-width: 650px;
+}
+
+.artisan-products-section {
+  margin-top: 64px;
+  margin-bottom: 96px;
+}
+
+.artisan-products-section .col-8,
+.artisan-products-section .col-sm-6,
+.artisan-products-section .col-md-4,
+.artisan-products-section .col-lg-3 {
+  padding-right: 16px;
+}
+
+.artisan-products-section .card {
+  margin-top: 8px;
+}
+
+/* ===============================
+   OTHER ARTISANS (PROFILE PAGE)
+================================ */
+
+.other-artisans-section {
+  margin-top: 96px;
+  margin-bottom: 96px;
+}
+
+.other-artisans-heading {
+  margin-bottom: 40px;
+}
+
+/* Card */
+.other-artisan-card {
+  background-color: #EDE5D6;
+  padding: 32px 24px;
+  text-align: center;
+  height: 100%;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Avatar */
+.other-artisan-avatar {
+  width: 120px;
+  height: 120px;
+  object-fit: contain;
+  background-color: #FAF7F2;
+  padding: 12px;
+}
+
+/* ===============================
+   OTHER ARTISANS BUTTON
+================================ */
+
+.other-artisans-section a {
+  font-family: "Poppins", sans-serif;
+  background-color: #3A2E2B;
+  color: #F7F2EB;
+  border: 1px solid #3A2E2B;
+  border-radius: 0;
+  padding: 10px 14px;
+  font-weight: 500;
+  transition: none; /* kill hover animation */
+}
+
+/* Disable hover effects */
+.other-artisan-btn:hover,
+.other-artisan-btn:focus {
+  background-color: #585B34;
+  color: #F7F2EB;
+  border-color: #585B34;
+  box-shadow: none;
+}
+
+/* ---------- PRODUCT DETAIL LAYOUT ---------- */
+
+.product-detail-row {
+  margin-top: 60px;
+  margin-bottom: 120px;
+}
+
+.product-detail-image {
+  border-radius: 0;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+}
+
+.product-detail-image {
+  max-height: 520px;
+  object-fit: cover;
+}
+
+
+/* ---------- TYPOGRAPHY ---------- */
+
+.product-detail-content {
+  font-family: 'Poppins', sans-serif;
+}
+
+.product-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.6rem;
+  margin-bottom: 12px;
+}
+
+.product-artisan {
+  font-family: 'Playfair Display', serif;
+  font-size: 1rem;
+  margin-bottom: 24px;
+}
+
+.product-price {
+  font-size: 1.5rem;
+  font-weight: 500;
+  margin: 28px 0;
+}
+
+.product-description {
+  font-size: 0.95rem;
+  line-height: 1.8;
+  max-width: 90%;
+  margin-bottom: 36px;
+}
+
+/* ---------- BADGES ---------- */
+
+.badge-soft-dark {
+  background-color: #34373F;
+  color: #F7F2EB;
+  font-weight: 400;
+  border-radius: 0;
+  padding: 10px;
+}
+
+/* ---------- ALERT ---------- */
+
+.product-alert {
+  margin: 32px 0;
+  padding: 18px 20px;
+  font-size: 0.9rem;
+}
+
+/* ---------- BUTTONS ---------- */
+
+.site-btn {
+  background-color: #585B34;
+  color: #F7F2EB;
+  border: 1px solid #585B34;
+  border-radius: 0;
+  padding: 12px 22px;
+  font-weight: 500;
+  transition: none;
+}
+
+.site-btn:hover {
+  background-color: #F7F2EB;
+  color: #585B34;
+  border: 1px solid #585B34;
+  border-radius: 0;
+}
+
+.site-btn-outline {
+  background-color: transparent;
+  color: #585B34;
+  border: 1px solid #585B34;
+  border-radius: 0;
+  padding: 12px 22px;
+  font-weight: 500;
+  transition: none;
+}
+
+.site-btn-outline:hover {
+  background-color: #585B34;
+  color: #F7F2EB;
+}
+
+.similar-product-heading {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.9rem;
+  margin-bottom: 36px;
+}
+
+.more-by-heading {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.9rem;
+  margin-bottom: 36px;
+}
+
+.more-by-section {
+  padding-bottom: 120px;
+}
+
+
+/* ===== Meet Artisan Section ===== */
+
+.meet-artisan-wrapper {
+  margin-top: 120px;
+  margin-bottom: 120px;
+}
+
+.meet-artisan-heading {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.9rem;
+  margin-bottom: 36px;
+}
+
+/* Card */
+.meet-artisan-card {
+  background: #ffffff;
+  padding: 48px 56px;
+  box-shadow: 0 12px 32px rgba(0,0,0,0.06);
+}
+
+/* Image */
+.meet-artisan-img {
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  object-fit: cover;
+  background-color: #EDE5D6;
+}
+
+/* Text hierarchy */
+.meet-artisan-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 2rem;
+  margin-bottom: 6px;
+}
+
+.meet-artisan-location {
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.9rem;
+  color: #6f6f6f;
+  margin-bottom: 18px;
+}
+
+.meet-artisan-story {
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.95rem;
+  line-height: 1.9;
+  max-width: 90%;
+  margin-bottom: 26px;
+}
+
+/* Button – same as site buttons */
+.site-btn {
+  background-color: #585B34;
+  color: #F7F2EB;
+  border: 1px solid #585B34;
+  border-radius: 0;
+  padding: 12px 26px;
+  font-family: 'Poppins', sans-serif;
+}
+
+.site-btn:hover {
+  background-color: #585B34;
+  color: #F7F2EB;
+}
+
+/* ----------------- FORMS ---------------------- */
+.submit-button {
+  background-color: #585B34;
+  color: #F7F2EB;
+  border-radius: 0;
+  border: 1px solid #585B34;
+}
+
+.submit-button:hover {
+  background-color: transparent;
+  color: #585B34;
+  border: 1px solid #585B34;
+}
+
+.submit-button-outline {
+  background-color: transparent;
+  color: #585B34;
+  border-radius: 0;
+  border: 1px solid #585B34;
+}
+
+.submit-button-outline:hover {
+  background-color: transparent;
+  color: #585B34;
+  border: 1px solid #585B34;
+}
+
+.profile-page {
+  padding-bottom: 50px;
+}
+
+.add-product-page input{
+  font-family: "Poppins", sans-serif;
+}
+
+.add-product-page select{
+  font-family: "Poppins", sans-serif;
+}
+
+.add-product-page option{
+  font-family: "Poppins", sans-serif;
+}
+
+/* ----------------- PROFILE ----------------------- */
+.profile-section {
+  margin-bottom: 3rem;
+}
+
+.section-divider {
+  margin: 3rem 0;
+}
+
+.orders-section {
+  margin-top: 3rem;
+}
+
+/* Remove default link styling */
+.order-card-link {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Fixed card height */
+.order-card {
+  height: 140px;
+  margin-bottom: 1.25rem;
+}
+
+/* Image container */
+.order-image-wrapper {
+  height: 140px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f1efe8; /* soft neutral */
+}
+
+/* Image itself */
+.order-product-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;   /* crops if needed */
+  object-position: center;
+}
+
+/* Card body spacing */
+.order-card-body {
+  padding: 1.25rem 1.5rem;
+}
+
+.order-card {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.order-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+}
+
+.seller-dashboard {
+  margin-top: 3rem;
+  margin-bottom: 4rem;
+}
+
+.seller-dashboard .card {
+  border-radius: 6px;
+}
+
+.seller-dashboard h3 {
+  margin-top: 0.25rem;
+}
+
+.seller-product-card {
+  height: 140px;
+}
+
+.seller-product-image {
+  height: 140px;
+  background-color: #EFE8D8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.seller-product-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.seller-product-actions {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.section-title {
+  margin-bottom: 1.75rem;
+}
+
+.delete-button {
+  border-radius: 0;
+}
+
+.modal-body {
+  font-family: "Poppins", sans-serif;
+}
+
+.modal button {
+  font-family: "Poppins", sans-serif;
+  border-radius: 0;
+}
+
+.modal btn-outline-secondary {
+  border: 1px solid #2E2E2E;
+}
+
+.modal-outline-button:hover {
+  color: #EFE8D8;
+  border: 1px solid #2E2E2E;
+  background-color: #2E2E2E;
+}
+
+/* Onboarding */
+.slide-in {
+  animation: slideInFromRight 0.45s ease forwards;
+}
+
+/* ------------- CHECKOUT -------------- */
+.checkout {
+  padding-bottom: 100px;
+}
+
+.checkout input {
+  font-family: "Poppins", sans-serif;
+}
+
+
+@keyframes slideInFromRight {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+

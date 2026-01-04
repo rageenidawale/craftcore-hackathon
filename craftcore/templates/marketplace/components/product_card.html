@@ -1,0 +1,53 @@
+<div class="product-card">
+
+  <!-- Product image -->
+  <div class="product-image-wrapper">
+    <img src="{{ product.image.url }}" alt="{{ product.name }}">
+  </div>
+
+  <div class="product-card-body">
+
+    <!-- Badges -->
+    <div class="product-badges">
+      <span class="product-badge">
+        {{ product.category.name }}
+      </span>
+
+      <span class="product-badge muted">
+        {{ product.material.name }}
+      </span>
+
+      {% if product.stock <= 0 %} <span class="product-badge warning">
+        Out of Stock
+        </span>
+        {% endif %}
+    </div>
+
+    <!-- Name -->
+    <h6 class="product-name">
+      {{ product.name }}
+    </h6>
+
+    <p class="small text-muted mb-2">
+      By {{ product.artisan.display_name }}
+    </p>
+
+    <!-- Price -->
+    <p class="product-price">
+      ₹{{ product.price }}
+    </p>
+
+    <!-- Actions -->
+    <div class="product-actions">
+      <a href="/products/{{ product.id }}/" class="btn product-btn-outline">
+        View
+      </a>
+
+      <a href="/checkout/?product={{ product.id }}"
+        class="btn product-btn-dark {% if product.stock <= 0 or not product.is_active %}disabled{% endif %}">
+        Buy Now
+      </a>
+    </div>
+
+  </div>
+</div>

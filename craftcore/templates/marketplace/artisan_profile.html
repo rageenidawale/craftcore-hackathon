@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}{{ artisan.display_name }} | CraftCore{% endblock %}
+
+{% block content %}
+
+<div class="container">
+
+  <!-- ================= ARTISAN MAIN SECTION ================= -->
+  <div class="row mb-5 align-items-center artisan-header">
+
+    <!-- Left: Artisan Image -->
+    <div class="col-md-4 text-center">
+      <img
+        src="{{ artisan.profile_image_url }}"
+        class="artisan-profile-img rounded-circle shadow-sm" alt="{{ artisan.display_name }}">
+    </div>
+
+    <!-- Right: Artisan Details -->
+    <div class="col-md-8">
+      <h3 class="mb-1">{{ artisan.display_name }}</h3>
+      <p class="text-muted mb-2">{{ artisan.location }}</p>
+      <p class="mb-3 artisan-description">
+        {{ artisan.story }}
+      </p>
+    </div>
+
+  </div>
+
+  <!-- ================= PRODUCTS BY ARTISAN ================= -->
+  {% if products %}
+  <div class="artisan-products-section">
+    <h4 class="mb-4">Products by {{ artisan.display_name }}</h4>
+
+    <div class="row flex-nowrap overflow-auto g-3">
+      {% for product in products %}
+      <div class="col-8 col-sm-6 col-md-4 col-lg-3">
+
+        {% include "marketplace/components/product_card.html" with product=product %}
+
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+  {% endif %}
+
+  <!-- ================= OTHER ARTISANS ================= -->
+  {% if other_artisans %}
+  <section class="other-artisans-section">
+  <h4 class="other-artisans-heading">
+    Check out other artisans
+  </h4>
+
+  <div class="row g-4">
+    {% for artisan in other_artisans %}
+      <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+
+        <div class="other-artisan-card">
+          <img
+            src="{{ artisan.profile_image_url }}"
+            class="other-artisan-avatar"
+            alt="{{ artisan.display_name }}"
+          >
+
+          <h6 class="mt-3 mb-1">
+            {{ artisan.display_name }}
+          </h6>
+
+          <p class="small text-muted mb-3">
+            {{ artisan.location }}
+          </p>
+
+          <a href="/artisans/{{ artisan.id }}/"
+             class="btn btn-dark btn-sm w-100">
+            View Artisan
+          </a>
+        </div>
+
+      </div>
+    {% endfor %}
+  </div>
+</section>
+  {% endif %}
+
+</div>
+
+{% endblock %}

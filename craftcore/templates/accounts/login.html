@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% block title %}Welcome | CraftCore{% endblock %}
+
+{% block content %}
+
+<div class="container d-flex justify-content-center align-items-center"
+     style="min-height: 80vh;">
+
+  <div class="card shadow-sm p-4"
+       style="max-width: 400px; width: 100%;">
+
+    <h4 class="mb-2 text-center">Welcome to CraftCore</h4>
+    <p class="text-muted text-center mb-4">
+      Login or create an account to continue
+    </p>
+
+    {% for message in messages %}
+      <div class="alert alert-danger">{{ message }}</div>
+    {% endfor %}
+
+    <form method="post">
+      {% csrf_token %}
+
+      <div class="mb-3">
+        <label class="form-label">Email</label>
+        <input
+          type="email"
+          name="email"
+          class="form-control"
+          required
+        >
+      </div>
+
+      <div class="mb-4">
+        <label class="form-label">Password</label>
+        <input
+          type="password"
+          name="password"
+          class="form-control"
+          required
+        >
+      </div>
+
+      <div class="d-grid">
+        <button class="btn btn-dark submit-button">
+          Let me in
+        </button>
+      </div>
+    </form>
+
+    <p class="text-muted small text-center mt-3 mb-0">
+      No separate login or signup — we’ll handle it for you 🙂
+    </p>
+
+  </div>
+
+</div>
+
+{% endblock %}

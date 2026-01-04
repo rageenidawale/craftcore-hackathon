@@ -1,0 +1,270 @@
+{% extends "base.html" %}
+{% block title %}My Profile | CraftCore{% endblock %}
+
+{% block content %}
+
+<div class="container profile-page">
+
+  <!-- ================= USER DETAILS ================= -->
+  <div class="profile-section">
+    <h3 class="mb-1">My Profile</h3>
+    <p class="text-muted mb-0">
+      {{ user.email }}
+    </p>
+  </div>
+
+  <hr class="section-divider">
+
+  <!-- ================= ORDERS SECTION ================= -->
+  <div class="order-section">
+    <h4 class="section-title">My Orders</h4>
+
+    {# IF user has NO orders #}
+    {% if orders|length == 0 %}
+    <div class="alert alert-light border">
+      <p class="mb-2">You haven’t placed any orders yet.</p>
+      <a href="/products/" class="btn btn-sm btn-dark submit-button">Browse Products</a>
+    </div>
+    {% endif %}
+
+    {# IF user HAS orders #}
+    {% if orders %}
+    {% for order in orders %}
+    {% for item in order.items.all %}
+    <a href="{% url 'product_detail' item.product.id %}" class="order-card-link">
+      <div class="card order-card shadow-sm">
+        <div class="row g-0 h-100 align-items-center">
+
+          <!-- Image -->
+          <div class="col-md-2 order-image-wrapper">
+            <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}" class="order-product-image">
+          </div>
+
+          <!-- Info -->
+          <div class="col-md-10">
+            <div class="card-body order-card-body">
+              <h6 class="mb-2">{{ item.product.name }}</h6>
+
+              <p class="mb-1 text-muted">
+                Order #{{ order.id }} · Qty {{ item.quantity }}
+              </p>
+
+              <p class="mb-0">
+                Status: <strong>{{ order.status }}</strong>
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </a>
+
+    {% endfor %}
+    {% endfor %}
+    {% endif %}
+
+
+
+  </div>
+  {% if user.artisanprofile and user.artisanprofile.is_active %}
+  <hr class="section-divider">
+
+  <!-- ================= SELLER SECTION ================= -->
+
+
+  <div>
+    <h4 class="seller-dashboard section-title">Seller Dashboard</h4>
+
+    {# SELLER STATS #}
+    <div class="row mb-5 g-4">
+      <div class="col-md-4">
+        <div class="card text-center shadow-sm">
+          <div class="card-body">
+            <h6 class="text-muted">Total Products</h6>
+            <h3>{{ total_products }}</h3>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="card text-center shadow-sm">
+          <div class="card-body">
+            <h6 class="text-muted">Total Orders</h6>
+            <h3>{{ total_orders }}</h3>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="card text-center shadow-sm">
+          <div class="card-body">
+            <h6 class="text-muted">Total Earned</h6>
+            <h3>₹{{ total_earned }}</h3>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ACTION BUTTONS -->
+    <div class="d-flex gap-2 mb-4">
+      <a href="{% url 'update_artisan' %}" class="btn btn-outline-dark btn-sm submit-button-outline">
+        Update Profile
+      </a>
+    </div>
+
+    {# IF seller has NO products #}
+    {% if products|length == 0 %}
+    <div class="alert alert-light border">
+      <p class="mb-2">You haven’t added any products yet.</p>
+    </div>
+    {% endif %}
+
+    {# IF seller HAS products #}
+    {% for product in products %}
+    <div class="card seller-product-card shadow-sm mb-4">
+      <div class="row g-0 align-items-center h-100">
+
+        <!-- Image -->
+        <div class="col-md-2 seller-product-image">
+          <img src="{{ product.image_url }}" alt="{{ product.name }}">
+        </div>
+
+        <!-- Details -->
+        <div class="col-md-7">
+          <div class="card-body">
+            <h6 class="mb-2">{{ product.name }}</h6>
+            <p class="mb-1 text-muted">₹ {{ product.price }}</p>
+            <p class="mb-0 text-muted">Orders: {{ product.order_count }}</p>
+          </div>
+        </div>
+
+        <!-- Actions -->
+        <div class="col-md-3 seller-product-actions">
+          <button href="/seller/products/{{ product.id }}/edit/" class="btn btn-sm submit-button-outline mb-2 w-100">
+            Edit
+          </button>
+          <button href="/seller/products/{{ product.id }}/delete/"
+            class="btn btn-sm btn-outline-danger w-100 delete-button" data-bs-toggle="modal"
+            data-bs-target="#deleteProductModal-{{ product.id }}">
+            Delete
+          </button>
+        </div>
+
+        <div class="modal fade" id="deleteProductModal-{{ product.id }}" tabindex="-1">
+          <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+
+              <!-- Header -->
+              <div class="modal-header">
+                <h5 class="modal-title text-danger">
+                  Delete Product
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+              </div>
+
+              <!-- Body -->
+              <div class="modal-body">
+                <p class="mb-2">
+                  Are you sure you want to delete
+                  <strong>{{ product.name }}</strong>?
+                </p>
+
+                <p class="text-muted small mb-3">
+                  This product will be removed from the marketplace.
+                  Existing orders will remain unaffected.
+                </p>
+
+                <strong class="text-danger">
+                  This action cannot be undone.
+                </strong>
+              </div>
+
+              <!-- Footer -->
+              <div class="modal-footer">
+                <button class="btn btn-outline-secondary modal-outline-button" data-bs-dismiss="modal">
+                  Cancel
+                </button>
+
+                <form method="post" action="/seller/products/{{ product.id }}/delete/">
+                  {% csrf_token %}
+                  <button class="btn btn-danger">
+                    Yes, Delete
+                  </button>
+                </form>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+    {% endfor %}
+
+    <!-- ADD PRODUCT BUTTON -->
+    <div class="mt-5">
+      <a href="/seller/products/add/" class="btn btn-dark submit-button">
+        + Add New Product
+      </a>
+    </div>
+
+  </div>
+
+  <!-- Danger zone -->
+  <div class="border-top pt-4 mt-5">
+    <p class="text-muted small mb-2">Danger Zone</p>
+
+    <button type="button" class="btn btn-outline-danger btn-sm delete-button" data-bs-toggle="modal"
+      data-bs-target="#stopSellerModal">
+      Stop Being a Seller
+    </button>
+  </div>
+
+  <div class="modal fade" id="stopSellerModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+
+        <div class="modal-header">
+          <h5 class="modal-title text-danger">Stop Being a Seller?</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+
+        <div class="modal-body">
+          <p class="mb-2">
+            This will:
+          </p>
+          <ul class="small text-muted">
+            <li>Remove your products from the marketplace</li>
+            <li>Prevent new orders</li>
+            <li>Keep your past orders and earnings intact</li>
+          </ul>
+
+          <strong class="text-danger">
+            This action cannot be undone.
+          </strong>
+        </div>
+
+        <div class="modal-footer">
+          <button class="btn btn-outline-secondary modal-outline-button" data-bs-dismiss="modal">
+            Cancel
+          </button>
+
+          <form method="post" action="{% url 'deactivate_artisan' %}">
+            {% csrf_token %}
+            <button class="btn btn-danger">
+              Stop Being a Seller
+            </button>
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+</div>
+
+{% endif %}
+
+{% endblock %}
+

@@ -1,0 +1,183 @@
+{% extends "base.html" %}
+{% load marketplace_extras %}
+{% block title %}Products | CraftCore{% endblock %}
+
+{% block content %}
+
+<div class="products-page container">
+  <div class="d-flex justify-content-between align-items-center mb-4 pt-3">
+
+    <h4 class="mb-0">
+      All Products
+    </h4>
+
+    <div class="d-flex gap-2">
+
+      <!-- Filter dropdown -->
+      <div class="dropdown">
+        <button class="btn btn-outline-dark btn-sm" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <i class="bi bi-funnel"></i> Filter
+        </button>
+
+        <div class="dropdown-menu dropdown-menu-end p-3" style="width: 280px;" onclick="event.stopPropagation()">
+
+          <form method="get" action="/products/">
+
+            <!-- ================= CATEGORIES ================= -->
+            <div class="mb-3">
+              <strong class="d-block mb-2">Category</strong>
+
+              {% for category in categories %}
+              <div class="form-check">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  name="category"
+                  value="{{ category.id }}"
+                  id="cat{{ category.id }}"
+                  {% if category.id|stringformat:"s" in selected_categories %}checked{% endif %}
+                >
+                <label class="form-check-label" for="cat{{ category.id }}">
+                  {{ category.name }}
+                </label>
+              </div>
+              {% endfor %}
+            </div>
+
+            <!-- ================= MATERIALS ================= -->
+            <div class="mb-3">
+              <strong class="d-block mb-2">Material</strong>
+
+              {% for material in materials %}
+              <div class="form-check">
+                <input 
+                  class="form-check-input" 
+                  type="checkbox" 
+                  name="material" 
+                  value="{{ material.id }}"
+                  id="mat{{ material.id }}" 
+                  {% if material.id|stringformat:"s" in selected_materials %} checked {% endif%}
+                >
+                <label class="form-check-label" for="mat{{ material.id }}">
+                  {{ material.name }}
+                </label>
+              </div>
+              {% endfor %}
+
+
+            </div>
+
+            <!-- ================= ACTIONS ================= -->
+            <div class="d-flex justify-content-between align-items-center">
+              <a href="/products/" class="small text-decoration-none">
+                Clear filters
+              </a>
+
+              <button class="btn btn-outline-dark btn-sm" type="submit" data-bs-auto-close="outside"
+                aria-expanded="false">
+                Apply
+              </button>
+            </div>
+
+          </form>
+        </div>
+      </div>
+
+      <!-- Sort dropdown -->
+      <div class="dropdown">
+        <button class="btn btn-outline-dark btn-sm" data-bs-toggle="dropdown" data-bs-auto-close="outside"
+          aria-expanded="false">
+          <i class="bi bi-arrow-down-up"></i> Sort
+        </button>
+
+        <div class="dropdown-menu dropdown-menu-end p-2">
+          <a class="dropdown-item {% if selected_sort == 'price_asc' %}active{% endif %}"
+            href="?{{ request.GET.urlencode|cut:'sort=price_asc'|cut:'sort=price_desc' }}&sort=price_asc">
+            Price: Low to High
+          </a>
+
+          <a class="dropdown-item {% if selected_sort == 'price_desc' %}active{% endif %}"
+            href="?{{ request.GET.urlencode|cut:'sort=price_asc'|cut:'sort=price_desc' }}&sort=price_desc">
+            Price: High to Low
+          </a>
+
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  {% if selected_categories or selected_materials or selected_sort %}
+  <div class="d-flex flex-wrap gap-3 mt-3 mb-3">
+
+    <!-- Category chips -->
+    {% for cat in selected_categories %}
+    <span class="badge bg-dark d-flex align-items-center gap-2">
+      Category: {{ categories|get_name_by_id:cat }}
+      <a href="?{{ request.GET.urlencode|cut:'category='|cut:cat }}" class="text-white text-decoration-none">
+        &times;
+      </a>
+    </span>
+    {% endfor %}
+
+    <!-- Material chips -->
+    {% for mat in selected_materials %}
+    <span class="badge bg-secondary d-flex align-items-center gap-2">
+      Material: {{ materials|get_name_by_id:mat }}
+      <a href="?{{ request.GET.urlencode|cut:'material='|cut:mat }}" class="text-white text-decoration-none">
+        &times;
+      </a>
+    </span>
+    {% endfor %}
+
+    <!-- Sort chip -->
+    {% if selected_sort %}
+    <span class="badge bg-light text-dark border d-flex align-items-center gap-2">
+      Sorted: {% if selected_sort == "price_asc" %}Price ↑{% else %}Price ↓{% endif %}
+      <a href="?{{ request.GET.urlencode|cut:'sort='|cut:selected_sort }}" class="text-dark text-decoration-none">
+        &times;
+      </a>
+    </span>
+    {% endif %}
+
+    <!-- Clear all -->
+    <a href="/products/" class="text-decoration-none small align-self-center">
+      Clear all
+    </a>
+
+  </div>
+  {% endif %}
+
+  <!-- Products grid -->
+  <div class="row g-4">
+    {% if products %}
+
+    {% for product in products %}
+    <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+      {% include "marketplace/components/product_card.html" with product=product %}
+    </div>
+    {% endfor %}
+
+    {% else %}
+    {% if selected_categories or selected_materials %}
+    <!-- No Results UI -->
+    <div class="col-12">
+      <div class="text-center py-5 border rounded bg-light">
+        <h4 class="mb-2">No products found</h4>
+        <p class="text-muted mb-3">
+          Try adjusting or clearing your filters to see more products.
+        </p>
+
+        <a href="/products/" class="btn btn-outline-dark btn-sm">
+          Clear all filters
+        </a>
+      </div>
+    </div>
+    {% endif %}
+    {% endif %}
+  </div>
+
+</div>
+
+{% endblock %}
