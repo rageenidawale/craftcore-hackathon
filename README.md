@@ -1,9 +1,6 @@
 # CraftCore  
 A Marketplace for Local Artisans
 
-**Repository:**
-https://github.com/rageenidawale/craftcore-hackathon
-
 ---
 
 ## Overview
