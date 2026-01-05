@@ -9,7 +9,7 @@ venv/
 .venv/
 
 # Django
-db.sqlite3
+# db.sqlite3
 media/
 
 # Node (if any)

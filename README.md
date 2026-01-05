@@ -44,12 +44,10 @@ CraftCore aims to:
 
 ### Platform Features
 - Role-based UI (buyer vs seller)
-- Persistent onboarding enforcement
 - Product availability handling (active, inactive, out of stock)
 - Historical analytics that do not change when products are deactivated
 - Custom error handling (404, access control)
 - Responsive UI
-- Clean separation of buyer and seller logic
 
 ---
 
@@ -143,7 +141,7 @@ DEBUG
 ALLOWED_HOSTS
 ```
 
-These should be configured on the hosting platform and not committed to the repository.
+These values are configured on the hosting platform (Render) and are not included in the repository.
 
 ---
 
